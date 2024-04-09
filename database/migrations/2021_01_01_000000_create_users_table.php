@@ -15,10 +15,24 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->integer('telephone');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('bank_name');
+            $table->string('bank_username');
+            $table->string('bank_account_number');
+            $table->unsignedBigInteger('vip_tier');
+            $table->float('balance');
+            $table->float('credit');
+            $table->unsignedBigInteger('role');
+            $table->tinyInteger('status');
+            $table->string('reference_code');
+            $table->string('frozen_amount');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('vip_tier')->references('id')->on('vip_details');
+            $table->foreign('role')->references('id')->on('role_permissions');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
